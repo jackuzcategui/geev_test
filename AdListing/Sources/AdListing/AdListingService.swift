@@ -8,7 +8,7 @@
 import Data
 
 public protocol AdListingServiceProtocol: Sendable {
-    func fetchAds(page: String?) async throws -> [String: String]
+    func fetchAds(page: String?) async throws -> [AdModel]
 }
 
 final public class AdListingService: AdListingServiceProtocol {
@@ -18,7 +18,8 @@ final public class AdListingService: AdListingServiceProtocol {
         self.dataService = dataService
     }
 
-    public func fetchAds(page: String? = nil) async throws -> [String: String] {
-        try await dataService.request(endpoint: .adListing(page: page))
+    public func fetchAds(page: String? = nil) async throws -> [AdModel] {
+        let response: AdListingResponse = try await dataService.request(endpoint: .adListing(page: page))
+        return AdModelMapper.map(response: response.data)
     }
 }

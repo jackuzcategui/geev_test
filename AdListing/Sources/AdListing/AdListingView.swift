@@ -11,7 +11,7 @@ public struct AdListingView: View {
     }
 
     public var body: some View {
-        Text(viewModel.ads.first?.value ?? "")
+        Text(viewModel.ads.first?.title ?? "")
             .onAppear {
                 Task {
                     await viewModel.viewDidLoad()

@@ -10,7 +10,7 @@ import SwiftUI
 public class AdListingViewModel: ObservableObject {
     private let service: AdListingServiceProtocol
 
-    @Published public var ads: [String: String] = ["": ""]
+    @Published public var ads: [AdModel] = []
     @Published public var errorMessage: String?
 
     public init(service: AdListingServiceProtocol) {
