@@ -63,11 +63,24 @@ public struct AdListingView: View {
                     .foregroundColor(.gray)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-        case .display(let ads):
+        case .display:
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(ads, id: \.id) {
-                        AdGridItem(ad: $0)
+                    ForEach(viewModel.ads, id: \.id) { item in
+                        AdGridItem(ad: item)
+                            .onAppear {
+                                if item.id == viewModel.ads[max(0, viewModel.ads.count - 4)].id {
+                                    Task {
+                                        await viewModel.didDisplayLastItem()
+                                    }
+                                }
+                            }
+                    }
+
+                    if viewModel.isLoadingMore {
+                        ProgressView()
+                            .frame(maxWidth: .infinity)
+                            .padding()
                     }
                 }
                 .padding(.top, 10)
@@ -87,7 +100,7 @@ struct AdGridItem: View {
             } placeholder: {
                 Color.gray.opacity(0.3)
             }
-            .frame(height: 150)
+            .frame(height: 128)
             .clipShape(RoundedRectangle(cornerRadius: 10))
 
             VStack(alignment: .leading, spacing: 4) {

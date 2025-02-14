@@ -12,13 +12,15 @@ public class AdListingViewModel: ObservableObject {
         case loading
         case empty
         case error(String)
-        case display([AdModel])
+        case display
     }
 
     private let service: AdListingServiceProtocol
     private var after: String?
 
     @Published public var state: AdListingState = .loading
+    @Published private(set) var ads: [AdModel] = []
+    @Published private(set) var isLoadingMore = false
 
     public init(service: AdListingServiceProtocol) {
         self.service = service
@@ -43,11 +45,32 @@ public class AdListingViewModel: ObservableObject {
             if fetchedAds.isEmpty {
                 state = .empty
             } else {
-                state = .display(fetchedAds)
+                state = .display
+                ads = fetchedAds
                 after = fetchedAds.last?.id
             }
         } catch {
             state = .error(error.localizedDescription)
+        }
+    }
+
+    @MainActor
+    public func didDisplayLastItem() async {
+        guard !isLoadingMore, after != nil else { return }
+        isLoadingMore = true
+
+        Task {
+            do {
+                let fetchedAds = try await self.service.fetchAds(page: after)
+                withAnimation {
+                    ads.append(contentsOf: fetchedAds)
+                }
+                after = fetchedAds.last?.id
+                state = .display
+            } catch {
+                state = .display
+            }
+            isLoadingMore = false
         }
     }
 }
