@@ -11,7 +11,7 @@ class AdModelMapper {
     func map(response: [AdListingData]) -> [AdModel] {
         let models = response.map {
             AdModel(id: $0._id,
-                    imageURL: $0.pictures[0].squares32,
+                    imageURL: $0.pictures[0].squares128,
                     title: $0.title,
                     postedTime: Date(timeIntervalSince1970: TimeInterval($0.creationDateMs) / 1000),
                     distance: formatDistance(location: $0.location) )

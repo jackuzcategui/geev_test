@@ -8,22 +8,46 @@
 import SwiftUI
 
 public class AdListingViewModel: ObservableObject {
-    private let service: AdListingServiceProtocol
+    public enum AdListingState {
+        case loading
+        case empty
+        case error(String)
+        case display([AdModel])
+    }
 
-    @Published public var ads: [AdModel] = []
-    @Published public var errorMessage: String?
+    private let service: AdListingServiceProtocol
+    private var after: String?
+
+    @Published public var state: AdListingState = .loading
 
     public init(service: AdListingServiceProtocol) {
         self.service = service
     }
 
     @MainActor
-    public func viewDidLoad() async {
+    public func viewAppeared(refresh: Bool = false) async {
+        guard case .loading = state else { return }
+        state = .loading
+
+        if refresh {
+            after = nil
+        }
+
+        await fetchAds()
+    }
+
+    @MainActor
+    private func fetchAds() async {
         do {
             let fetchedAds = try await self.service.fetchAds(page: nil)
-            ads = fetchedAds
+            if fetchedAds.isEmpty {
+                state = .empty
+            } else {
+                state = .display(fetchedAds)
+                after = fetchedAds.last?.id
+            }
         } catch {
-            errorMessage = error.localizedDescription
+            state = .error(error.localizedDescription)
         }
     }
 }
