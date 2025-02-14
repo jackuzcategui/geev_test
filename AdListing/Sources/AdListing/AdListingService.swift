@@ -20,6 +20,6 @@ final public class AdListingService: AdListingServiceProtocol {
 
     public func fetchAds(page: String? = nil) async throws -> [AdModel] {
         let response: AdListingResponse = try await dataService.request(endpoint: .adListing(page: page))
-        return AdModelMapper.map(response: response.data)
+        return AdModelMapper().map(response: response.data)
     }
 }
