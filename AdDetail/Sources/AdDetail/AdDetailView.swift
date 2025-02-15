@@ -41,20 +41,30 @@ public class AdDetailViewController: UIViewController {
     }
 
     private func bindViewModel() {
+        bindDetails()
+        bindImage()
+        bindError()
+    }
+
+    private func bindDetails() {
         viewModel.adDetailSubject
-            .subscribe(onNext: { detail in
-                DispatchQueue.global().async { [weak self] in
-                    if let data = try? Data(contentsOf: URL(string: detail.imageURL)!) {
-                        if let image = UIImage(data: data) {
-                            DispatchQueue.main.async {
-                                self?.imageView.image = image
-                            }
-                        }
-                    }
-                }
+            .subscribe(onNext: { [weak self] detail in
+                self?.titleLabel.text = detail.title
+                self?.summaryLabel.text = detail.summary
             })
             .disposed(by: disposeBag)
+    }
 
+    private func bindImage() {
+        viewModel.imageSubject
+            .subscribe(onNext: { [weak self] image in
+                self?.imageView.image = image
+                self?.contactButton.isHidden = false
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func bindError() {
         viewModel.errorSubject
             .subscribe(onNext: { error in
                 print(error)
@@ -64,6 +74,9 @@ public class AdDetailViewController: UIViewController {
 
     private func setupView() {
         setupImageView()
+        setupButton()
+        setupTitleLabel()
+        setupSummaryLabel()
     }
 
     private func setupImageView() {
@@ -75,6 +88,41 @@ public class AdDetailViewController: UIViewController {
             $0.height.equalTo(imageView.snp.width)
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(20)
+        }
+    }
+
+    private func setupButton() {
+        var buttonConfiguration = UIButton.Configuration.plain()
+        buttonConfiguration.contentInsets = .init(top: 8, leading: 12, bottom: 8, trailing: 12)
+
+        contactButton.configuration = buttonConfiguration
+        contactButton.setTitle("Soyez le 1er à contacter", for: .normal)
+        contactButton.backgroundColor = .white
+        contactButton.setTitleColor(.black, for: .normal)
+        contactButton.layer.cornerRadius = 4
+        imageView.addSubview(contactButton)
+        contactButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(20)
+            $0.top.equalToSuperview().inset(20)
+        }
+        contactButton.isHidden = true
+    }
+
+    private func setupTitleLabel() {
+        view.addSubview(titleLabel)
+        titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        titleLabel.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.top.equalTo(imageView.snp.bottom).offset(16)
+        }
+    }
+
+    private func setupSummaryLabel() {
+        view.addSubview(summaryLabel)
+        summaryLabel.font = .systemFont(ofSize: 22, weight: .regular)
+        summaryLabel.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
         }
     }
 }

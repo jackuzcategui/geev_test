@@ -21,6 +21,7 @@ public class AdDetailViewModel: ObservableObject {
 
     let adDetailSubject = PublishSubject<AdDetailModel>()
     let errorSubject = PublishSubject<String>()
+    let imageSubject = PublishSubject<UIImage?>()
     private let disposeBag = DisposeBag()
 
     private let service: AdDetailServiceProtocol
@@ -42,9 +43,26 @@ public class AdDetailViewModel: ObservableObject {
             detail = try await self.service.fetchDetail(id: id)
             state = .display
             adDetailSubject.onNext(detail!)
+            if let path = detail?.imageURL {
+                fetchImage(path: path)
+            }
         } catch {
             state = .error(error.localizedDescription)
             errorSubject.onNext(error.localizedDescription)
+        }
+    }
+
+    private func fetchImage(path: String) {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let url = URL(string: path), let data = try? Data(contentsOf: url), let image = UIImage(data: data) else {
+                DispatchQueue.main.async {
+                    self?.imageSubject.onNext(nil)
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                self?.imageSubject.onNext(image)
+            }
         }
     }
 }
