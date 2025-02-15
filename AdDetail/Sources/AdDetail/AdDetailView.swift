@@ -40,14 +40,18 @@ public class AdDetailViewController: UIViewController {
         }
     }
 
-    private func setupView() {
-
-    }
-
     private func bindViewModel() {
         viewModel.adDetailSubject
             .subscribe(onNext: { detail in
-                print(detail)
+                DispatchQueue.global().async { [weak self] in
+                    if let data = try? Data(contentsOf: URL(string: detail.imageURL)!) {
+                        if let image = UIImage(data: data) {
+                            DispatchQueue.main.async {
+                                self?.imageView.image = image
+                            }
+                        }
+                    }
+                }
             })
             .disposed(by: disposeBag)
 
@@ -56,6 +60,22 @@ public class AdDetailViewController: UIViewController {
                 print(error)
             })
             .disposed(by: disposeBag)
+    }
+
+    private func setupView() {
+        setupImageView()
+    }
+
+    private func setupImageView() {
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        view.addSubview(imageView)
+        imageView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.height.equalTo(imageView.snp.width)
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(20)
+        }
     }
 }
 
