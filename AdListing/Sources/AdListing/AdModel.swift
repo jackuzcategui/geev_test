@@ -11,6 +11,6 @@ public struct AdModel: Codable, Sendable, Identifiable {
     public let id: String
     let imageURL: String
     let title: String
-    let postedTime: Date?
+    let postedTime: String
     let distance: String
 }

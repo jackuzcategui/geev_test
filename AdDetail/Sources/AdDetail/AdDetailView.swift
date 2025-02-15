@@ -111,6 +111,7 @@ public class AdDetailViewController: UIViewController {
     private func setupTitleLabel() {
         view.addSubview(titleLabel)
         titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        titleLabel.numberOfLines = 0
         titleLabel.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.top.equalTo(imageView.snp.bottom).offset(16)
@@ -120,6 +121,7 @@ public class AdDetailViewController: UIViewController {
     private func setupSummaryLabel() {
         view.addSubview(summaryLabel)
         summaryLabel.font = .systemFont(ofSize: 22, weight: .regular)
+        summaryLabel.numberOfLines = 0
         summaryLabel.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.top.equalTo(titleLabel.snp.bottom).offset(16)
