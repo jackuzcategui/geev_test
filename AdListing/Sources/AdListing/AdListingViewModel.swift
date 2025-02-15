@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  AdListingViewModel.swift
 //  AdListing
 //
 //  Created by Jack Uzcategui on 13/02/2025.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 public class AdListingViewModel: ObservableObject {
-    public enum AdListingState {
+    public enum State {
         case loading
         case empty
         case error(String)
@@ -18,7 +18,7 @@ public class AdListingViewModel: ObservableObject {
     private let service: AdListingServiceProtocol
     private var after: String?
 
-    @Published public var state: AdListingState = .loading
+    @Published public var state: State = .loading
     @Published private(set) var ads: [AdModel] = []
     @Published private(set) var isLoadingMore = false
 
@@ -74,4 +74,3 @@ public class AdListingViewModel: ObservableObject {
         }
     }
 }
-

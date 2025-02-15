@@ -1,18 +1,25 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+//
+//  AdListingView.swift
+//  AdListing
+//
+//  Created by Jack Uzcategui on 13/02/2025.
+//
 
 import SwiftUI
+import Core
 
 public struct AdListingView: View {
     @StateObject var viewModel: AdListingViewModel
+    let coordinator: Coordinating
 
     private let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
     ]
 
-    public init(viewModel: AdListingViewModel) {
+    public init(viewModel: AdListingViewModel, coordinator: Coordinating) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.coordinator = coordinator
     }
 
     public var body: some View {
@@ -74,6 +81,9 @@ public struct AdListingView: View {
                                         await viewModel.didDisplayLastItem()
                                     }
                                 }
+                            }
+                            .onTapGesture {
+                                coordinator.showAdDetail(adId: item.id)
                             }
                     }
 
