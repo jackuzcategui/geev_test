@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3C063E6F2D5E30500043BA58 /* AdDetail in Frameworks */ = {isa = PBXBuildFile; productRef = 3C063E6E2D5E30500043BA58 /* AdDetail */; };
+		3C13F4012D5E2E8900DDD462 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 3C13F4002D5E2E8900DDD462 /* Core */; };
+		3C13F4032D5E2E8900DDD462 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 3C13F4022D5E2E8900DDD462 /* Data */; };
+		3C13F4062D5E2FE400DDD462 /* AdListing in Frameworks */ = {isa = PBXBuildFile; productRef = 3C13F4052D5E2FE400DDD462 /* AdListing */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		3CDD35692D5E067300E538C9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +31,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C063E702D5E307A0043BA58 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
+		3C13F3FD2D5E2E4700DDD462 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
+		3C13F3FE2D5E2E7C00DDD462 /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
+		3CC52D6E2D6249ED004D5B85 /* AdDetail */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AdDetail; sourceTree = "<group>"; };
+		3CC52D6F2D6249ED004D5B85 /* AdListing */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AdListing; sourceTree = "<group>"; };
 		3CDD35582D5E067200E538C9 /* Geev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CDD35682D5E067300E538C9 /* GeevTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeevTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CDD35722D5E067300E538C9 /* GeevUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeevUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +64,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C063E6F2D5E30500043BA58 /* AdDetail in Frameworks */,
+				3C13F4062D5E2FE400DDD462 /* AdListing in Frameworks */,
+				3C13F4032D5E2E8900DDD462 /* Data in Frameworks */,
+				3C13F4012D5E2E8900DDD462 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +88,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C13F3FF2D5E2E8900DDD462 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3CDD354F2D5E067200E538C9 = {
 			isa = PBXGroup;
 			children = (
 				3CDD355A2D5E067200E538C9 /* Geev */,
 				3CDD356B2D5E067300E538C9 /* GeevTests */,
 				3CDD35752D5E067300E538C9 /* GeevUITests */,
+				3C13F3FD2D5E2E4700DDD462 /* Core */,
+				3C13F3FE2D5E2E7C00DDD462 /* Data */,
+				3C063E702D5E307A0043BA58 /* DesignSystem */,
+				3CC52D6E2D6249ED004D5B85 /* AdDetail */,
+				3CC52D6F2D6249ED004D5B85 /* AdListing */,
+				3C13F3FF2D5E2E8900DDD462 /* Frameworks */,
 				3CDD35592D5E067200E538C9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +141,10 @@
 			);
 			name = Geev;
 			packageProductDependencies = (
+				3C13F4002D5E2E8900DDD462 /* Core */,
+				3C13F4022D5E2E8900DDD462 /* Data */,
+				3C13F4052D5E2FE400DDD462 /* AdListing */,
+				3C063E6E2D5E30500043BA58 /* AdDetail */,
 			);
 			productName = Geev;
 			productReference = 3CDD35582D5E067200E538C9 /* Geev.app */;
@@ -195,6 +228,8 @@
 			);
 			mainGroup = 3CDD354F2D5E067200E538C9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3CDD35592D5E067200E538C9 /* Products */;
 			projectDirPath = "";
@@ -558,6 +593,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3C063E6E2D5E30500043BA58 /* AdDetail */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AdDetail;
+		};
+		3C13F4002D5E2E8900DDD462 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+		3C13F4022D5E2E8900DDD462 /* Data */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Data;
+		};
+		3C13F4052D5E2FE400DDD462 /* AdListing */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AdListing;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3CDD35502D5E067200E538C9 /* Project object */;
 }
