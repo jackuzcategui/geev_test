@@ -15,6 +15,7 @@ let package = Package(
             targets: ["AdDetail"]),
     ],
     dependencies: [
+        .package(path: "../Data"),
         .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "6.0.0"),
         .package(url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1"))
     ],
@@ -23,7 +24,7 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "AdDetail",
-            dependencies: ["RxSwift", "SnapKit"]),
+            dependencies: ["Data", "RxSwift", "SnapKit"]),
         .testTarget(
             name: "AdDetailTests",
             dependencies: ["AdDetail"]
