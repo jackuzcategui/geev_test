@@ -24,7 +24,7 @@ public class AdDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    init(viewModel: AdDetailViewModel) {
+    public init(viewModel: AdDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -73,6 +73,7 @@ public class AdDetailViewController: UIViewController {
     }
 
     private func setupView() {
+        view.backgroundColor = .lightGray
         setupImageView()
         setupButton()
         setupTitleLabel()

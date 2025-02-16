@@ -8,7 +8,6 @@
 import SwiftUI
 import RxSwift
 
-@MainActor
 public class AdDetailViewModel: ObservableObject {
     public enum State {
         case loading
@@ -32,12 +31,14 @@ public class AdDetailViewModel: ObservableObject {
         self.id = id
     }
 
+    @MainActor
     public func viewAppeared() async {
         guard case .loading = state else { return }
         state = .loading
         await fetchDetail()
     }
 
+    @MainActor
     private func fetchDetail() async {
         do {
             detail = try await self.service.fetchDetail(id: id)
