@@ -8,7 +8,7 @@
 import SwiftUI
 
 public class AdListingViewModel: ObservableObject {
-    public enum State {
+    public enum State: Equatable {
         case loading
         case empty
         case error(String)
@@ -59,18 +59,16 @@ public class AdListingViewModel: ObservableObject {
         guard !isLoadingMore, after != nil else { return }
         isLoadingMore = true
 
-        Task {
-            do {
-                let fetchedAds = try await self.service.fetchAds(page: after)
-                withAnimation {
-                    ads.append(contentsOf: fetchedAds)
-                }
-                after = fetchedAds.last?.id
-                state = .display
-            } catch {
-                state = .display
+        do {
+            let fetchedAds = try await self.service.fetchAds(page: after)
+            withAnimation {
+                ads.append(contentsOf: fetchedAds)
             }
-            isLoadingMore = false
+            after = fetchedAds.last?.id
+            state = .display
+        } catch {
+            state = .display
         }
+        isLoadingMore = false
     }
 }

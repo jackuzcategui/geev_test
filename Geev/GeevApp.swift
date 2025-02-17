@@ -16,28 +16,8 @@ struct GeevApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootViewUIKit()
 //            RootView(container: DependencyResolver.shared.container)
         }
-    }
-}
-
-struct ContentView: View {
-    var body: some View {
-        NavigationViewWrapper()
-    }
-}
-
-struct NavigationViewWrapper: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> some UIViewController {
-        let navigationController = UINavigationController()
-        let coordinator = MainCoordinatorUIKit(container: DependencyResolver.shared.container,
-                                               navigationController: navigationController)
-        coordinator.start()
-        return navigationController
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        //
     }
 }

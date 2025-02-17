@@ -24,9 +24,9 @@ class AdModelMapper {
         let eventDate = Date(timeIntervalSince1970: TimeInterval(time))
         let components = Calendar.current.dateComponents([.minute, .hour, .day], from: currentDate, to: eventDate)
 
-        if let minutes = components.minute, minutes < 60 {
+        if let minutes = components.minute, minutes < 60, minutes != 0 {
             return "\(minutes)min"
-        } else if let hours = components.hour, hours < 24 {
+        } else if let hours = components.hour, hours < 24, hours != 0 {
             return "\(hours)h"
         } else if let days = components.day, days < 7 {
             return "\(days)d"
