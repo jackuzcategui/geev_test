@@ -9,9 +9,16 @@ class AdDetailMapper {
     func map(response: AdDetailResponse) -> AdDetailModel {
         AdDetailModel(
             id: response._id,
-            imageURL: "https://images.geev.fr/\(response.pictures.first ?? "")/resizes/1000",
+            imageURL: getImagePath(picture: response.pictures.first),
             title: response.title,
             summary: response.description
         )
+    }
+
+    func getImagePath(picture: String?) -> String {
+        guard let picture = picture else {
+            return ""
+        }
+        return "https://images.geev.fr/\(picture)/resizes/1000"
     }
 }

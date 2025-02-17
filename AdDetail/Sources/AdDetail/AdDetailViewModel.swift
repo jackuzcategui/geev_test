@@ -9,7 +9,7 @@ import SwiftUI
 import RxSwift
 
 public class AdDetailViewModel: ObservableObject {
-    public enum State {
+    public enum State: Equatable {
         case loading
         case error(String)
         case display
