@@ -16,8 +16,7 @@ struct GeevApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootViewUIKit()
-//            RootView(container: DependencyResolver.shared.container)
+            CoordinatorSwitcher()
         }
     }
 }
