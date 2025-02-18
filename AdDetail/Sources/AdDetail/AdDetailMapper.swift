@@ -19,6 +19,6 @@ class AdDetailMapper {
         guard let picture = picture else {
             return ""
         }
-        return "https://images.geev.fr/\(picture)/resizes/1000"
+        return "https://images.geev.fr/\(picture)/squares/600"
     }
 }

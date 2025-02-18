@@ -25,7 +25,6 @@ public struct AdListingView: View {
     public var body: some View {
         NavigationView {
             content
-                .navigationTitle(Text("Ads"))
                 .task {
                     await viewModel.viewAppeared()
                 }
@@ -101,42 +100,9 @@ public struct AdListingView: View {
     }
 }
 
-struct AdGridItem: View {
-    let ad: AdModel
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            AsyncImage(url: URL(string: ad.imageURL)) { image in
-                image.resizable().scaledToFill()
-            } placeholder: {
-                Color.gray.opacity(0.3)
-            }
-            .frame(height: 200)
-            .clipped()
-
-            VStack(alignment: .leading) {
-                Text(ad.title)
-                    .font(.headline)
-                    .lineLimit(2)
-                HStack {
-                    Text(ad.postedTime)
-                    Spacer()
-                    Text(ad.distance)
-                }
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            }
-            .padding(.horizontal, 20)
-            .clipped()
-
-            Spacer()
-        }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.gray.opacity(0.5), lineWidth: 1)
-        )
-    }
+#Preview {
+    let service = AdListingServiceMock()
+    let viewModel = AdListingViewModel(service: service)
+    let coordinator = MockCoordinator()
+    AdListingView(viewModel: viewModel, coordinator: coordinator)
 }

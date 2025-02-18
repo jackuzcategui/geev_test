@@ -59,6 +59,7 @@ public class AdDetailViewController: UIViewController {
         viewModel.imageSubject
             .subscribe(onNext: { [weak self] image in
                 self?.imageView.image = image
+                self?.loadingView.stopAnimating()
                 self?.contactButton.isHidden = false
             })
             .disposed(by: disposeBag)
@@ -73,8 +74,10 @@ public class AdDetailViewController: UIViewController {
     }
 
     private func setupView() {
-        view.backgroundColor = .lightGray
+        view.backgroundColor = UIColor(red: 229/255, green: 228/255, blue: 230/255, alpha: 1)
+        navigationController?.navigationBar.tintColor = .white
         setupImageView()
+        setupLoadingView()
         setupButton()
         setupTitleLabel()
         setupSummaryLabel()
@@ -83,13 +86,24 @@ public class AdDetailViewController: UIViewController {
     private func setupImageView() {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.backgroundColor = .gray
         view.addSubview(imageView)
         imageView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.height.equalTo(imageView.snp.width)
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(20)
+            $0.top.equalToSuperview()
         }
+    }
+
+    private func setupLoadingView() {
+        imageView.addSubview(loadingView)
+        loadingView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        loadingView.style = .large
+        loadingView.hidesWhenStopped = true
+        loadingView.startAnimating()
     }
 
     private func setupButton() {

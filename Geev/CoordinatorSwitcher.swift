@@ -26,8 +26,8 @@ struct CoordinatorSwitcher: View {
         }) {
             Text("Switch to \(appState.currentCoordinator == .uiKit ? "SwiftUI" : "UIKit")")
                 .padding()
-                .background(Color.blue)
-                .foregroundColor(.white)
+                .background(.yellow)
+                .foregroundColor(.black)
                 .cornerRadius(8)
         }
         .padding()

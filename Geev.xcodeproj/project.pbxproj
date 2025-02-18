@@ -31,7 +31,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3C063E702D5E307A0043BA58 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
 		3C13F3FD2D5E2E4700DDD462 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
 		3C13F3FE2D5E2E7C00DDD462 /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
 		3CC52D6E2D6249ED004D5B85 /* AdDetail */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AdDetail; sourceTree = "<group>"; };
@@ -103,7 +102,6 @@
 				3CDD35752D5E067300E538C9 /* GeevUITests */,
 				3C13F3FD2D5E2E4700DDD462 /* Core */,
 				3C13F3FE2D5E2E7C00DDD462 /* Data */,
-				3C063E702D5E307A0043BA58 /* DesignSystem */,
 				3CC52D6E2D6249ED004D5B85 /* AdDetail */,
 				3CC52D6F2D6249ED004D5B85 /* AdListing */,
 				3C13F3FF2D5E2E8900DDD462 /* Frameworks */,

@@ -47,6 +47,7 @@ struct RootView: View {
                     let viewModel = AdDetailViewModel(service: container.resolve(AdDetailServiceProtocol.self)!, id: adId)
                     AdDetailViewControllerRepresentable(viewModel: viewModel)
                 }
+                .navigationTitle(Text(""))
         }
     }
 }

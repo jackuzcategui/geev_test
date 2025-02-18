@@ -13,7 +13,7 @@ enum CoordinatorType {
 }
 
 class AppState: ObservableObject {
-    @Published var currentCoordinator: CoordinatorType = .uiKit
+    @Published var currentCoordinator: CoordinatorType = .swiftUI
 
     func switchCoordinator() {
         currentCoordinator = currentCoordinator == .uiKit ? .swiftUI : .uiKit

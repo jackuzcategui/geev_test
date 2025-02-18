@@ -22,7 +22,7 @@ final class AdDetailMapperTests: XCTestCase {
         let model = mapper.map(response: response)
 
         XCTAssertEqual(model.id, "123456789")
-        XCTAssertEqual(model.imageURL, "https://images.geev.fr/image1.png/resizes/1000")
+        XCTAssertEqual(model.imageURL, "https://images.geev.fr/image1.png/squares/600")
         XCTAssertEqual(model.title, "Test Item 1")
         XCTAssertEqual(model.summary, "Test description for Item 1")
     }
